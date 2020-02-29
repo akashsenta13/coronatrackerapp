@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+
+<body>
+<div class="container">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <h2 class="my-0 mr-md-auto font-weight-normal">Corona Virus Tracker</h2>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Confirmed Cases</div>
+                <div class="card-body">
+                    <h1 class="card-title" id="confirmed">{{ confirmed_total }}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card text-white bg-danger mb-3">
+                <div class="card-header">Deaths</div>
+                <div class="card-body">
+                    <h1 class="card-title" id="death">{{ death_total }}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Recovered</div>
+                <div class="card-body">
+                    <h1 class="card-title" id="recovered">{{ recovered_total }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+            <h2 class="display-7">Country wise Data</h2>
+        </div>
+    </div>
+    <!-- http://maps.google.com/maps?q=24.197611,120.780512 -->
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">State</th>
+                <th scope="col">Country</th>
+                <th scope="col">Map Link</th>
+                <th scope="col">Confirmed</th>
+                <th scope="col">Deaths</th>
+                <th scope="col">Recovered</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for dt in data %}
+            <tr>
+                <td>{{ dt.index }}</td>
+                <td>{{ dt.state or '' }}</td>
+                <td>{{ dt.country }}</td>
+                <td><a href="http://maps.google.com/maps?q={{ dt.Lat }},{{ dt.Long }}" target="_blank">Map</a></td>
+                <td>{{ dt.confirmed }}</td>
+                <td>{{ dt.deaths }}</td>
+                <td>{{ dt.recovered }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<footer class="page-footer font-small blue">
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">Data collected from:
+        <a href="https://github.com/CSSEGISandData/COVID-19" target="_blank"> CSSEGISandData/COVID-19</a>
+    </div>
+    <!-- Copyright -->
+
+</footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</html>
